@@ -3,11 +3,16 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.11";
+    flake-compat = {
+      url = "github:ElvishJerricco/flake-compat/add-overrideInputs";
+      flake = false;
+    };
   };
 
   outputs = {
     self,
-    nixpkgs
+    nixpkgs,
+    ...
   }: let
     pkgs = import nixpkgs { system = "x86_64-linux"; };
     localPackages = import ./pkgs/default.nix { pkgs = pkgs; };
